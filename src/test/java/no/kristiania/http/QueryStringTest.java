@@ -3,6 +3,7 @@ package no.kristiania.http;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class QueryStringTest {
     @Test
@@ -15,6 +16,12 @@ public class QueryStringTest {
     void shouldRetrieveStatusCode_401() {
         QueryString queryString = new QueryString("status=401");
         assertEquals("401", queryString.getParameter("status"));
+    }
+
+    @Test
+    void shouldReturnNullForMissingParameters(){
+        QueryString queryString = new QueryString("body=Hello");
+        assertNull(queryString.getParameter("status"));
     }
 
 
