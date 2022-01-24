@@ -6,11 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class QueryStringTest {
-    @Test
-    void shouldRetrieveStatusCode() {
-        QueryString queryString = new QueryString("status=200");
-        assertEquals("200", queryString.getParameter("status"));
-    }
 
     @Test
     void shouldRetrieveStatusCode_401() {
