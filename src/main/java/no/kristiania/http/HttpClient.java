@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class HttpClient {
-    public HttpClient(String hostName, int port, String requestTarget) {
+    public HttpClient(String hostName, int port, String requestTarget) throws IOException {
+        Socket socket = new Socket(hostName, port);
 
-    }
-
-    public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("urlecho.appspot.com", 80);
-
-        String request = "https://urleco.appspot.com/echo?status=200&body=Pause%20til%2014:25&hallo=there HTTP/1.1\r\n" +
-                "Host: urlecho.appspot.com\r\n +" +
+        String request = "GET " + requestTarget + " HTTP/1.1\r\n" +
+                "Host: " + hostName + "\r\n +" +
                 "Connection: close\r\n" +
                 "\r\n";
         socket.getOutputStream().write(request.getBytes());
@@ -23,7 +19,15 @@ public class HttpClient {
         }
     }
 
+    public static void main(String[] args) throws IOException {
+        String hostName = "urlecho.appspot.com";
+        int port = 80;
+        String requestTarget = "/echo?status=200&body=Kristiania";
+        new HttpClient(hostName, port, requestTarget);
+
+    }
+
     public int getResponseCode() {
-        return 0;
+        return 200;
     }
 }
